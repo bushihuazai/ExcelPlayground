@@ -300,6 +300,30 @@
 
 ---
 
+## 6. 场景示例集（scenarios/）
+
+以下 15 个场景文件，每个包含 3–5 个从易到难的示例公式及详细说明：
+
+| 编号 | 场景 | 核心函数 |
+|------|------|----------|
+| [01](scenarios/[01]LAMBDA基础.md) | LAMBDA 基础 | LAMBDA、递归 |
+| [02](scenarios/[02]LET局部变量.md) | LET 局部变量 | LET |
+| [03](scenarios/[03]MAP逐元素处理.md) | MAP 逐元素处理 | MAP |
+| [04](scenarios/[04]BYROW按行计算.md) | BYROW 按行计算 | BYROW |
+| [05](scenarios/[05]BYCOL按列计算.md) | BYCOL 按列计算 | BYCOL |
+| [06](scenarios/[06]REDUCE累计折叠.md) | REDUCE 累计折叠 | REDUCE |
+| [07](scenarios/[07]SCAN过程可视化.md) | SCAN 过程可视化 | SCAN |
+| [08](scenarios/[08]MAKEARRAY规则生成.md) | MAKEARRAY 规则生成 | MAKEARRAY |
+| [09](scenarios/[09]VSTACK纵向拼接.md) | VSTACK 纵向拼接 | VSTACK |
+| [10](scenarios/[10]HSTACK横向拼接.md) | HSTACK 横向拼接 | HSTACK |
+| [11](scenarios/[11]FILTER条件筛选.md) | FILTER 条件筛选 | FILTER |
+| [12](scenarios/[12]SORT与SORTBY排序.md) | SORT 与 SORTBY 排序 | SORT、SORTBY |
+| [13](scenarios/[13]UNIQUE去重提取.md) | UNIQUE 去重提取 | UNIQUE |
+| [14](scenarios/[14]XLOOKUP高级查找.md) | XLOOKUP 高级查找 | XLOOKUP |
+| [15](scenarios/[15]综合实战流水线.md) | 综合实战流水线 | 多函数组合 |
+
+---
+
 ## 📜 License
 
 本项目采用 [MIT License](LICENSE)。
