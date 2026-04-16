@@ -1,0 +1,106 @@
+@startmindmap
+title Excel 函数式编程 · 函数分类体系
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+
+<style>
+mindmapDiagram {
+  .definition {
+    BackgroundColor #E3F2FD
+    LineColor #1565C0
+  }
+  .generate {
+    BackgroundColor #E8F5E9
+    LineColor #2E7D32
+  }
+  .select {
+    BackgroundColor #FFF3E0
+    LineColor #E65100
+  }
+  .mapping {
+    BackgroundColor #F3E5F5
+    LineColor #6A1B9A
+  }
+  .fold {
+    BackgroundColor #FCE4EC
+    LineColor #AD1457
+  }
+  .concat {
+    BackgroundColor #E0F7FA
+    LineColor #00695C
+  }
+  .clean {
+    BackgroundColor #FFF9C4
+    LineColor #F57F17
+  }
+  .text {
+    BackgroundColor #EFEBE9
+    LineColor #4E342E
+  }
+}
+</style>
+
+* **Excel\n函数式编程**
+
+** 定义 <<definition>>
+*** LAMBDA
+**** 定义可复用函数
+**** 支持递归
+*** LET
+**** 局部变量
+**** 缓存中间结果
+
+** 生成 <<generate>>
+*** SEQUENCE ⭐
+**** 数字 / 日期序列
+**** 行列索引
+*** MAKEARRAY
+**** 按规则生成二维数组
+
+** 选取 <<select>>
+*** INDEX ⭐
+**** 选行 / 选列 / 切片
+*** CHOOSECOLS / CHOOSEROWS
+**** 按位置选取
+*** DROP / TAKE
+**** 截取头尾
+
+** 映射 <<mapping>>
+*** MAP
+**** 逐元素映射
+*** BYROW
+**** 按行计算
+*** BYCOL
+**** 按列计算
+
+** 折叠 <<fold>>
+*** REDUCE
+**** 聚合为单值
+*** SCAN
+**** 每步累计值
+
+** 拼接与重塑 <<concat>>
+*** VSTACK / HSTACK
+**** 纵向 / 横向拼接
+*** TOCOL / TOROW
+**** 展平数组
+*** WRAPCOLS / WRAPROWS
+**** 一维 → 二维
+
+** 数据清洗 <<clean>>
+*** FILTER
+**** 条件筛选
+*** SORT / SORTBY
+**** 排序
+*** UNIQUE
+**** 去重
+*** XLOOKUP / XMATCH
+**** 增强查找
+
+** 文本处理 <<text>>
+*** TEXTSPLIT / TEXTJOIN
+**** 拆分 / 合并
+*** TEXTBEFORE / TEXTAFTER
+**** 截取文本片段
+
+@endmindmap

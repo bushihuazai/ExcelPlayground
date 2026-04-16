@@ -1,0 +1,42 @@
+@startuml
+title 纯公式数据流水线 · 典型处理模式
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+skinparam defaultFontSize 12
+
+skinparam rectangle {
+  RoundCorner 15
+}
+
+rectangle "📥 **数据输入**\nA2:E200" as input #E8F5E9
+rectangle "🧹 **清洗**\nFILTER · TRIM · IFERROR" as clean #E3F2FD
+rectangle "🔄 **转换**\nMAP · BYROW · LET" as transform #F3E5F5
+rectangle "📊 **聚合**\nUNIQUE · REDUCE · SUMPRODUCT" as aggregate #FFF3E0
+rectangle "📋 **输出**\nSORT · HSTACK · TAKE" as output #FCE4EC
+
+input -right-> clean : LET(raw, ...)
+clean -right-> transform : LET(valid, ...)
+transform -right-> aggregate : LET(mapped, ...)
+aggregate -right-> output : SORT(result)
+
+note bottom of clean
+  去除空值、修正格式
+  INDEX(data,, col) 引用列
+end note
+
+note bottom of transform
+  计算衍生字段
+  多数组并行映射
+end note
+
+note bottom of aggregate
+  分组统计
+  UNIQUE + MAP + FILTER
+end note
+
+note bottom of output
+  排序、截取
+  拼接表头与汇总行
+end note
+
+@enduml

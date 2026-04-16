@@ -1,0 +1,61 @@
+@startuml
+title Excel 函数式编程 · 推荐学习路径
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+skinparam defaultFontSize 13
+skinparam ArrowThickness 2
+
+skinparam activity {
+  BackgroundColor #E3F2FD
+  BorderColor #1565C0
+  FontColor #212121
+  DiamondBackgroundColor #FFF9C4
+  DiamondBorderColor #F57F17
+}
+
+|#E8F5E9| 第一阶段：基础概念 |
+start
+:📘 **LAMBDA + LET**
+定义函数 & 局部变量;
+:📘 **SEQUENCE + INDEX** ⭐
+生成序列 & 动态选取;
+
+|#E3F2FD| 第二阶段：高阶映射 |
+:📗 **MAP / BYROW / BYCOL**
+逐元素 / 按行 / 按列映射;
+:📗 **REDUCE / SCAN**
+折叠聚合 & 运行累计;
+
+|#FFF3E0| 第三阶段：数据操作 |
+fork
+  :📙 **FILTER / SORT / UNIQUE**
+  条件筛选 & 排序 & 去重;
+fork again
+  :📙 **VSTACK / HSTACK / TOCOL**
+  拼接 & 重塑;
+fork again
+  :📙 **TEXTSPLIT / TEXTJOIN**
+  文本处理;
+end fork
+
+|#F3E5F5| 第四阶段：综合实战 |
+:📕 **组合技：纯公式流水线**
+多步清洗 → 聚合 → 输出;
+:📕 **命名函数库**
+沉淀可复用 LAMBDA;
+
+|#FCE4EC| 第五阶段：领域场景 |
+fork
+  :🏢 人力资源分析;
+fork again
+  :💰 财务报表;
+fork again
+  :📦 库存管理;
+fork again
+  :📅 排班计划;
+fork again
+  :🔍 数据质量;
+end fork
+
+stop
+@enduml
