@@ -1,277 +1,233 @@
-# ExcelPlayground
+# 🧮 ExcelPlayground
 
-一个总结和示意 **Excel 基于纯公式的"可编程技巧库"**——用 LAMBDA、SEQUENCE、INDEX 等动态数组函数把 Excel 变成函数式编程环境。
+> **把 Excel 变成函数式编程环境** —— 用 LAMBDA、SEQUENCE、INDEX 等动态数组函数，构建纯公式的"可编程技巧库"。
 
-> **适用版本**：Microsoft 365 / Excel 2021+（支持动态数组与 LAMBDA 系列函数）
->
-> 所有示例可直接粘贴到单元格中（根据你的区域设置调整 `,` 或 `;` 分隔符）。
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Excel Version](https://img.shields.io/badge/Excel-Microsoft%20365%20%2F%202021%2B-217346?logo=microsoftexcel&logoColor=white)
 
----
-
-## 📚 目录
-
-| # | 专题 | 说明 |
-|---|------|------|
-| 1 | [LAMBDA + LET](examples/01-lambda-let.md) | 定义可复用函数、局部变量、流水线骨架 |
-| 2 | [SEQUENCE + INDEX](examples/02-sequence-index.md) | ⭐ 动态数组核心——生成序列、选行选列、Top-N、逆序、采样 |
-| 3 | [MAP / BYROW / BYCOL](examples/03-map-byrow-bycol.md) | 逐元素、按行、按列的高阶映射 |
-| 4 | [REDUCE / SCAN](examples/04-reduce-scan.md) | 折叠聚合与运行累计 |
-| 5 | [MAKEARRAY](examples/05-makearray.md) | 规则生成数组（含 SEQUENCE 广播替代方案） |
-| 6 | [拼接与重塑](examples/06-stack-reshape.md) | VSTACK/HSTACK/CHOOSECOLS/DROP/TAKE/TOCOL/WRAPCOLS |
-| 7 | [声明式数据清洗](examples/07-filter-sort-unique.md) | FILTER/SORT/SORTBY/UNIQUE/XLOOKUP/XMATCH |
-| 8 | [文本处理](examples/08-text-processing.md) | TEXTSPLIT/TEXTJOIN/TEXTBEFORE/TEXTAFTER |
-| 9 | [组合技：实战流水线](examples/09-advanced-pipelines.md) | 多步纯公式数据管道——清洗→聚合→输出 |
-| 10 | [命名函数库](examples/10-named-functions.md) | 名称管理器中可复用的 LAMBDA 函数集 |
-
-> 📖 每篇文档包含**基础示例 + 进阶技巧 + 实用组合**，建议按顺序阅读或按需跳转。
+**适用版本**：Microsoft 365 / Excel 2021+（支持动态数组与 LAMBDA 系列函数）  
+所有示例可直接粘贴到单元格中（根据区域设置调整 `,` 或 `;` 分隔符）。
 
 ---
 
-## 1. 核心理念：把 Excel 当成函数式编程环境
+## 📁 项目结构
 
-### 核心函数速查
-
-| 类别 | 函数 | 一句话说明 |
-|------|------|-----------|
-| **定义** | `LAMBDA` | 定义可复用函数 |
-| | `LET` | 定义局部变量，提升可读性和性能 |
-| **生成** | `SEQUENCE` | ⭐ 生成数字序列（行号、日期、索引…） |
-| | `MAKEARRAY` | 按行列号规则生成二维数组 |
-| **选取** | `INDEX` | ⭐ 按行号/列号选取（选行、选列、切片） |
-| | `CHOOSECOLS` / `CHOOSEROWS` | 按位置选取列/行 |
-| | `DROP` / `TAKE` | 截取/丢弃头尾行列 |
-| **映射** | `MAP` | 逐元素映射 |
-| | `BYROW` / `BYCOL` | 按行/按列映射 |
-| **折叠** | `REDUCE` | 折叠聚合为单值 |
-| | `SCAN` | 返回每步累计值（过程可视化） |
-| **拼接** | `VSTACK` / `HSTACK` | 纵向/横向拼表 |
-| | `TOCOL` / `TOROW` | 展平为列/行 |
-| | `WRAPCOLS` / `WRAPROWS` | 将一维数组重塑为二维 |
-| **清洗** | `FILTER` | 条件筛选 |
-| | `SORT` / `SORTBY` | 排序 |
-| | `UNIQUE` | 去重 |
-| | `XLOOKUP` / `XMATCH` | 增强查找 |
-| **文本** | `TEXTSPLIT` / `TEXTJOIN` | 拆分/合并文本 |
-| | `TEXTBEFORE` / `TEXTAFTER` | 截取文本片段 |
-
----
-
-## 2. 精选示例速览
-
-> 完整示例及更多进阶技巧请点击上方目录中的对应链接。
-
-### 2.1 LAMBDA + LET：封装可读函数
-
-```excel
-=LAMBDA(price, discount,
-  LET(result, price * (1 - discount), MAX(0, result))
-)(A2, B2)
+```
+ExcelPlayground/
+├── README.md                      ← 你正在阅读的主文档
+├── QUICK_START.md                 ← 快速入门（5 分钟上手）
+│
+├── formulas/                      ← 📘 基础公式参考（10 篇专题）
+│   ├── 01-lambda-let.md
+│   ├── 02-sequence-index.md
+│   ├── ...
+│   └── 10-named-functions.md
+│
+├── scenarios/                     ← 📗 场景示例
+│   ├── basic/                     ←   基础函数场景（14 篇·单函数深入）
+│   │   ├── [01]LAMBDA基础.md
+│   │   ├── ...
+│   │   └── [14]XLOOKUP高级查找.md
+│   └── advanced/                  ←   综合实战案例（6 篇·多函数组合）
+│       ├── [15]综合实战流水线.md
+│       ├── ...
+│       └── [20]数据质量与异常检测.md
+│
+├── assets/                        ← 📊 PlantUML 图示源文件
+│   ├── function-taxonomy.puml
+│   ├── learning-path.puml
+│   └── data-pipeline.puml
+│
+└── LICENSE
 ```
 
-→ [更多示例](examples/01-lambda-let.md)
+**三层内容体系**：
+
+| 层级 | 目录 | 定位 | 阅读方式 |
+|:----:|------|------|----------|
+| 📘 | `formulas/` | **基础公式参考** — 按函数分类的语法、示例与对比 | 按需查阅 |
+| 📗 | `scenarios/basic/` | **基础函数场景** — 每篇聚焦一个函数，3–5 个由浅入深的实战题 | 顺序学习 |
+| 📕 | `scenarios/advanced/` | **综合实战案例** — 多函数组合的领域级解决方案 | 挑战进阶 |
 
 ---
 
-### 2.2 ⭐ SEQUENCE + INDEX：简洁的核心技巧
+## 🗺️ 学习路径
 
-**生成序列**
+> 以下学习路径图帮助你按照由浅入深的顺序掌握 Excel 函数式编程，PlantUML 源文件见 [`assets/learning-path.puml`](assets/learning-path.puml)。
 
-```excel
-=SEQUENCE(10)                   -- 1~10 列向量
-=SEQUENCE(1, 10)                -- 1~10 行向量
-=SEQUENCE(10, 1, 0, 2)          -- 偶数：0,2,4,...,18
-=SEQUENCE(7, 1, TODAY(), 1)     -- 连续 7 天日期
 ```
-
-**INDEX 选列/选行**
-
-```excel
-=INDEX(A2:E100,, 3)             -- 取第 3 列
-=INDEX(A2:E100, SEQUENCE(ROWS(A2:E100)), {1,3,5})  -- 取第 1/3/5 列
+┌─────────────────────────────────────────────────────────────────┐
+│                    第一阶段 · 基础概念                           │
+│  📘 LAMBDA + LET        →  📘 SEQUENCE + INDEX ⭐              │
+│  定义函数 & 局部变量         生成序列 & 动态选取                  │
+└────────────────────────────────┬────────────────────────────────┘
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    第二阶段 · 高阶映射                           │
+│  📗 MAP / BYROW / BYCOL  →  📗 REDUCE / SCAN                  │
+│  逐元素 / 按行 / 按列映射     折叠聚合 & 运行累计                │
+└────────────────────────────────┬────────────────────────────────┘
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    第三阶段 · 数据操作                           │
+│  📙 FILTER / SORT / UNIQUE    拼接：VSTACK / HSTACK / TOCOL    │
+│  📙 XLOOKUP / XMATCH          文本：TEXTSPLIT / TEXTJOIN       │
+│  📙 MAKEARRAY                  重塑：WRAPCOLS / DROP / TAKE     │
+└────────────────────────────────┬────────────────────────────────┘
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    第四阶段 · 综合实战                           │
+│  📕 组合技：纯公式流水线      📕 命名函数库                     │
+│  清洗 → 转换 → 聚合 → 输出    沉淀可复用 LAMBDA                 │
+└────────────────────────────────┬────────────────────────────────┘
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    第五阶段 · 领域场景                           │
+│  🏢 人力资源  💰 财务报表  📦 库存管理  📅 排班计划  🔍 数据质量 │
+└─────────────────────────────────────────────────────────────────┘
 ```
-
-**SEQUENCE + INDEX 组合**
-
-```excel
--- 取前 N 行
-=LET(
-  data, A2:E100, n, 10,
-  INDEX(data, SEQUENCE(n), SEQUENCE(1, COLUMNS(data)))
-)
-
--- 逆序排列
-=LET(
-  data, A2:A20, n, ROWS(data),
-  INDEX(data, SEQUENCE(n, 1, n, -1))
-)
-
--- 乘法表（SEQUENCE 广播 > MAKEARRAY）
-=SEQUENCE(9) * SEQUENCE(1, 9)
-```
-
-→ [更多示例](examples/02-sequence-index.md)
 
 ---
 
-### 2.3 MAP / BYROW / BYCOL：映射
+## 🧩 函数分类速查
 
-```excel
-=MAP(A2:A10, LAMBDA(x, UPPER(TRIM(x))))
-=BYROW(B2:F10, LAMBDA(r, SUM(r)))
-=BYCOL(B2:F10, LAMBDA(c, MAX(c)))
-```
+> PlantUML 源文件见 [`assets/function-taxonomy.puml`](assets/function-taxonomy.puml)。
 
-→ [更多示例](examples/03-map-byrow-bycol.md)
+### 定义类
 
----
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `LAMBDA` | 定义可复用函数 | 支持递归、可存入名称管理器 |
+| `LET` | 定义局部变量 | 缓存中间结果、提升可读性与性能 |
 
-### 2.4 REDUCE / SCAN：折叠与累计
+### 生成类
 
-```excel
-=REDUCE(0, A2:A10, LAMBDA(acc, x, acc + x))              -- 累加
-=REDUCE(1, SEQUENCE(10), LAMBDA(acc, x, acc * x))         -- 10! 阶乘
-=SCAN(1000, B2:B20, LAMBDA(bal, cf, bal + cf))             -- 余额轨迹
-```
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `SEQUENCE` ⭐ | 生成数字序列 | 行号、日期、索引…最常用的"瑞士军刀" |
+| `MAKEARRAY` | 按规则生成二维数组 | `LAMBDA(r,c,...)` 控制每个单元格 |
 
-→ [更多示例](examples/04-reduce-scan.md)
+### 选取类
 
----
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `INDEX` ⭐ | 按行号/列号选取 | 选行、选列、切片 |
+| `CHOOSECOLS` / `CHOOSEROWS` | 按位置选取列/行 | 比 INDEX 多列写法更直观 |
+| `DROP` / `TAKE` | 截取/丢弃头尾行列 | 语义比 INDEX 切片更清晰 |
 
-### 2.5 MAKEARRAY vs SEQUENCE 广播
+### 映射类
 
-```excel
--- MAKEARRAY 写法
-=MAKEARRAY(8, 8, LAMBDA(r, c, MOD(r + c, 2)))
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `MAP` | 逐元素映射 | 支持多数组同步映射 |
+| `BYROW` | 按行计算 | 返回 N×1 列向量 |
+| `BYCOL` | 按列计算 | 返回 1×M 行向量 |
 
--- SEQUENCE 简洁写法（推荐）
-=MOD(SEQUENCE(8) + SEQUENCE(1, 8), 2)
-```
+### 折叠类
 
-→ [更多示例](examples/05-makearray.md)
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `REDUCE` | 折叠聚合为单值 | `(acc, x) → acc'` 模式 |
+| `SCAN` | 返回每步累计值 | 过程可视化，便于调试 |
 
----
+### 拼接与重塑类
 
-### 2.6 拼接与重塑
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `VSTACK` / `HSTACK` | 纵向/横向拼接 | 列/行数需匹配 |
+| `TOCOL` / `TOROW` | 展平为列/行 | 可忽略空值或错误 |
+| `WRAPCOLS` / `WRAPROWS` | 一维 → 二维重塑 | 指定每列/每行元素数 |
 
-```excel
-=VSTACK(A2:C10, A15:C20)                        -- 上下合并
-=HSTACK(SEQUENCE(ROWS(A2:E100)), A2:E100)        -- 添加序号列
-=CHOOSECOLS(A2:F100, 1, 3, 5)                    -- 选取指定列
-=TAKE(A2:F100, 10, 3)                            -- 取前 10 行前 3 列
-=WRAPROWS(SEQUENCE(12), 4)                       -- 1~12 排为 3×4
-```
+### 数据清洗类
 
-→ [更多示例](examples/06-stack-reshape.md)
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `FILTER` | 条件筛选 | 支持 AND（`*`）/ OR（`+`）逻辑 |
+| `SORT` / `SORTBY` | 排序 | SORTBY 支持外部排序键 |
+| `UNIQUE` | 去重 | 支持 `exactly_once` 参数 |
+| `XLOOKUP` / `XMATCH` | 增强查找 | 替代 VLOOKUP，支持左查找 |
 
----
+### 文本处理类
 
-### 2.7 声明式数据清洗
-
-```excel
--- 用 INDEX 替代硬编码列引用
-=LET(
-  data, A2:E100,
-  region, INDEX(data,, 2),
-  amount, INDEX(data,, 5),
-  FILTER(data, (region = "华东") * (amount > 10000), "无结果")
-)
-
--- 去重 + 计数 + 排序 = 频率表
-=LET(
-  col, C2:C100,
-  u, UNIQUE(col),
-  cnt, MAP(u, LAMBDA(v, SUM((col = v) * 1))),
-  SORT(HSTACK(u, cnt), 2, -1)
-)
-```
-
-→ [更多示例](examples/07-filter-sort-unique.md)
+| 函数 | 用途 | 核心特征 |
+|------|------|----------|
+| `TEXTSPLIT` | 按分隔符拆分文本 | 支持行列双向拆分 |
+| `TEXTJOIN` | 合并文本 | 可忽略空值 |
+| `TEXTBEFORE` / `TEXTAFTER` | 截取文本片段 | 支持第 N 次出现 |
 
 ---
 
-### 2.8 文本处理
+## 📚 内容导航
 
-```excel
-=TEXTSPLIT(A2, "-")                              -- 拆分
-=TEXTJOIN(",", TRUE, FILTER(B2:B100, B2:B100<>""))  -- 合并
+### 📘 基础公式参考（`formulas/`）
 
--- SEQUENCE + MID 提取所有数字
-=LET(
-  text, A2, len, LEN(text),
-  chars, MID(text, SEQUENCE(len), 1),
-  digits, FILTER(chars, ISNUMBER(VALUE(chars)), ""),
-  TEXTJOIN("", TRUE, digits)
-)
-```
+每篇包含 **语法说明 + 基础示例 + 进阶技巧 + 实用组合**，建议按顺序阅读或按需跳转。
 
-→ [更多示例](examples/08-text-processing.md)
-
----
-
-### 2.9 组合技：纯公式流水线
-
-**区域销售汇总（完整管道）**
-
-```excel
-=LET(
-  raw, A2:E200,
-  valid, FILTER(raw, INDEX(raw,, 5) > 0),
-  region, INDEX(valid,, 2),
-  amount, INDEX(valid,, 5),
-  u, UNIQUE(region),
-  total, MAP(u, LAMBDA(r, SUM(FILTER(amount, region = r)))),
-  SORT(HSTACK(u, total), 2, -1)
-)
-```
-
-**同比环比计算**
-
-```excel
-=LET(
-  sales, B2:B13,
-  n, ROWS(sales),
-  prev, INDEX(sales, SEQUENCE(n - 1)),
-  curr, INDEX(sales, SEQUENCE(n - 1, 1, 2)),
-  growth, (curr - prev) / prev,
-  HSTACK(INDEX(A2:A13, SEQUENCE(n - 1, 1, 2)), curr, growth)
-)
-```
-
-→ [更多示例](examples/09-advanced-pipelines.md)
+| # | 专题 | 核心函数 | 说明 |
+|:-:|------|----------|------|
+| 01 | [LAMBDA + LET](formulas/01-lambda-let.md) | `LAMBDA` `LET` | 定义可复用函数、局部变量、流水线骨架 |
+| 02 | [SEQUENCE + INDEX](formulas/02-sequence-index.md) | `SEQUENCE` `INDEX` | ⭐ 动态数组核心——生成序列、选行选列、Top-N |
+| 03 | [MAP / BYROW / BYCOL](formulas/03-map-byrow-bycol.md) | `MAP` `BYROW` `BYCOL` | 逐元素、按行、按列的高阶映射 |
+| 04 | [REDUCE / SCAN](formulas/04-reduce-scan.md) | `REDUCE` `SCAN` | 折叠聚合与运行累计 |
+| 05 | [MAKEARRAY](formulas/05-makearray.md) | `MAKEARRAY` | 规则生成数组（含 SEQUENCE 广播对比） |
+| 06 | [拼接与重塑](formulas/06-stack-reshape.md) | `VSTACK` `HSTACK` 等 | 纵横拼接 / 展平 / 重塑 / 截取 |
+| 07 | [声明式数据清洗](formulas/07-filter-sort-unique.md) | `FILTER` `SORT` 等 | 条件筛选 / 排序 / 去重 / 增强查找 |
+| 08 | [文本处理](formulas/08-text-processing.md) | `TEXTSPLIT` `TEXTJOIN` 等 | 拆分 / 合并 / 截取文本 |
+| 09 | [组合技：实战流水线](formulas/09-advanced-pipelines.md) | 多函数组合 | 多步纯公式数据管道 |
+| 10 | [命名函数库](formulas/10-named-functions.md) | `LAMBDA` 命名函数 | 名称管理器中可复用的 LAMBDA 函数集 |
 
 ---
 
-## 3. 命名函数库
+### 📗 基础函数场景（`scenarios/basic/`）
 
-在 **公式 → 名称管理器** 中定义 LAMBDA，团队共享、无需 VBA：
+每篇聚焦**一个核心函数**，包含 3–5 个由浅入深的实战示例，层层递进讲解。
 
-| 函数名 | 用途 | 核心技巧 |
-|--------|------|----------|
-| `SAFE_DIV(a, b)` | 安全除法 | `IF(b=0, "", a/b)` |
-| `RUNNING_TOTAL(arr)` | 运行累计 | `SCAN` |
-| `GROUP_SUM(keys, vals)` | 分组求和 | `UNIQUE + MAP + FILTER` |
-| `GROUP_COUNT(keys)` | 分组计数 | `UNIQUE + MAP` |
-| `TOP_N(data, n, col)` | 前 N 行 | `SORT + TAKE` |
-| `REVERSE(arr)` | 逆序 | `SEQUENCE(n,1,n,-1) + INDEX` |
-| `PAGINATE(data, page, size)` | 分页取数 | `SEQUENCE(size,1,start) + INDEX` |
-| `MOVING_AVG(arr, window)` | 移动平均 | `SEQUENCE` 滑动窗口 + `INDEX` |
-| `UNPIVOT(rows, cols, vals)` | 逆透视 | `SEQUENCE + 整除/取余索引` |
-| `PERCENTILE_RANK(arr)` | 百分位排名 | `MAP` + 向量化比较 |
-
-→ [完整定义与用法](examples/10-named-functions.md)
+| 编号 | 场景 | 核心函数 | 难度 |
+|:----:|------|----------|:----:|
+| [01](scenarios/basic/[01]LAMBDA基础.md) | LAMBDA 基础 | `LAMBDA` 递归 | ⭐ |
+| [02](scenarios/basic/[02]LET局部变量.md) | LET 局部变量 | `LET` | ⭐ |
+| [03](scenarios/basic/[03]MAP逐元素处理.md) | MAP 逐元素处理 | `MAP` | ⭐⭐ |
+| [04](scenarios/basic/[04]BYROW按行计算.md) | BYROW 按行计算 | `BYROW` | ⭐⭐ |
+| [05](scenarios/basic/[05]BYCOL按列计算.md) | BYCOL 按列计算 | `BYCOL` | ⭐⭐ |
+| [06](scenarios/basic/[06]REDUCE累计折叠.md) | REDUCE 累计折叠 | `REDUCE` | ⭐⭐⭐ |
+| [07](scenarios/basic/[07]SCAN过程可视化.md) | SCAN 过程可视化 | `SCAN` | ⭐⭐⭐ |
+| [08](scenarios/basic/[08]MAKEARRAY规则生成.md) | MAKEARRAY 规则生成 | `MAKEARRAY` | ⭐⭐ |
+| [09](scenarios/basic/[09]VSTACK纵向拼接.md) | VSTACK 纵向拼接 | `VSTACK` | ⭐ |
+| [10](scenarios/basic/[10]HSTACK横向拼接.md) | HSTACK 横向拼接 | `HSTACK` | ⭐ |
+| [11](scenarios/basic/[11]FILTER条件筛选.md) | FILTER 条件筛选 | `FILTER` | ⭐⭐ |
+| [12](scenarios/basic/[12]SORT与SORTBY排序.md) | SORT 与 SORTBY 排序 | `SORT` `SORTBY` | ⭐⭐ |
+| [13](scenarios/basic/[13]UNIQUE去重提取.md) | UNIQUE 去重提取 | `UNIQUE` | ⭐⭐ |
+| [14](scenarios/basic/[14]XLOOKUP高级查找.md) | XLOOKUP 高级查找 | `XLOOKUP` | ⭐⭐⭐ |
 
 ---
 
-## 4. 💡 SEQUENCE / INDEX 技巧速查
+### 📕 综合实战案例（`scenarios/advanced/`）
 
-这两个函数是贯穿全库的"瑞士军刀"，以下是最常用的模式：
+多函数组合解决真实业务问题，包含完整的 ETL 管道与领域分析。
+
+| 编号 | 场景 | 核心函数组合 | 难度 |
+|:----:|------|-------------|:----:|
+| [15](scenarios/advanced/[15]综合实战流水线.md) | 🔗 综合实战流水线 | `FILTER` + `SORT` + `UNIQUE` + `MAP` + `REDUCE` | ⭐⭐⭐⭐ |
+| [16](scenarios/advanced/[16]人力资源数据分析.md) | 🏢 人力资源数据分析 | `UNIQUE` + `MAP` + `FILTER` + `MAKEARRAY` | ⭐⭐⭐⭐ |
+| [17](scenarios/advanced/[17]财务报表与预算分析.md) | 💰 财务报表与预算分析 | `SUMPRODUCT` + `XLOOKUP` + `SCAN` | ⭐⭐⭐⭐⭐ |
+| [18](scenarios/advanced/[18]库存管理与预警.md) | 📦 库存管理与预警 | `SCAN` + `SORTBY` + `MAKEARRAY` + `MAP` | ⭐⭐⭐⭐⭐ |
+| [19](scenarios/advanced/[19]日期时间与排班计划.md) | 📅 日期时间与排班计划 | `SEQUENCE` + `MAKEARRAY` + `WEEKDAY` | ⭐⭐⭐⭐ |
+| [20](scenarios/advanced/[20]数据质量与异常检测.md) | 🔍 数据质量与异常检测 | `BYROW` + `BYCOL` + `MAP` + `PERCENTILE` | ⭐⭐⭐⭐⭐ |
+
+---
+
+## ⚡ 核心技巧速查
+
+### SEQUENCE / INDEX 常用模式
+
+这两个函数是贯穿全库的"瑞士军刀"：
 
 | 模式 | 公式 | 说明 |
 |------|------|------|
-| 行号序列 | `SEQUENCE(n)` | 1,2,…,n |
-| 列号序列 | `SEQUENCE(1, n)` | 横向 1,2,…,n |
-| 偶数序列 | `SEQUENCE(n, 1, 0, 2)` | 0,2,4,…,2(n-1) |
-| 逆序序列 | `SEQUENCE(n, 1, n, -1)` | n,n-1,…,1 |
+| 行号序列 | `SEQUENCE(n)` | 1, 2, …, n |
+| 列号序列 | `SEQUENCE(1, n)` | 横向 1, 2, …, n |
+| 偶数序列 | `SEQUENCE(n, 1, 0, 2)` | 0, 2, 4, …, 2(n-1) |
+| 逆序序列 | `SEQUENCE(n, 1, n, -1)` | n, n-1, …, 1 |
 | 日期序列 | `SEQUENCE(7, 1, TODAY(), 1)` | 连续 7 天 |
 | 选整列 | `INDEX(data,, k)` | 第 k 列 |
 | 选多列 | `INDEX(data, SEQUENCE(ROWS(data)), {1,3,5})` | 第 1/3/5 列 |
@@ -282,50 +238,140 @@
 | 乘法广播 | `SEQUENCE(n) * SEQUENCE(1, m)` | n×m 乘法表 |
 | 循环模式 | `MOD(SEQUENCE(n) - 1, k) + 1` | 1,2,…,k,1,2,…,k |
 | 分组编号 | `INT((SEQUENCE(n) - 1) / k) + 1` | 1,1,1,2,2,2,… |
-| 填充矩阵 | `SEQUENCE(rows, cols, 0, 0)` | 全零矩阵 |
+| 全零矩阵 | `SEQUENCE(rows, cols, 0, 0)` | 填充常量矩阵 |
+
+### 命名函数库速查
+
+在 **公式 → 名称管理器** 中定义 LAMBDA，团队共享、无需 VBA：
+
+| 函数名 | 用途 | 核心技巧 | 详情 |
+|--------|------|----------|------|
+| `SAFE_DIV(a, b)` | 安全除法 | `IF(b=0, "", a/b)` | [→](formulas/10-named-functions.md) |
+| `RUNNING_TOTAL(arr)` | 运行累计 | `SCAN` | [→](formulas/10-named-functions.md) |
+| `GROUP_SUM(keys, vals)` | 分组求和 | `UNIQUE` + `MAP` + `FILTER` | [→](formulas/10-named-functions.md) |
+| `GROUP_COUNT(keys)` | 分组计数 | `UNIQUE` + `MAP` | [→](formulas/10-named-functions.md) |
+| `TOP_N(data, n, col)` | 前 N 行 | `SORT` + `TAKE` | [→](formulas/10-named-functions.md) |
+| `REVERSE(arr)` | 逆序 | `SEQUENCE` + `INDEX` | [→](formulas/10-named-functions.md) |
+| `PAGINATE(data, page, size)` | 分页取数 | `SEQUENCE` + `INDEX` | [→](formulas/10-named-functions.md) |
+| `MOVING_AVG(arr, window)` | 移动平均 | `SEQUENCE` 滑动窗口 | [→](formulas/10-named-functions.md) |
+| `UNPIVOT(rows, cols, vals)` | 逆透视 | `SEQUENCE` + 整除/取余 | [→](formulas/10-named-functions.md) |
+| `PERCENTILE_RANK(arr)` | 百分位排名 | `MAP` + 向量化比较 | [→](formulas/10-named-functions.md) |
 
 ---
 
-## 5. 使用建议
+## 🔧 纯公式数据流水线
 
-1. **优先用 `LET`** 给中间结果命名——降低维护成本，便于调试
-2. **优先用 `SEQUENCE` 生成索引**——替代辅助列和手写常量数组
-3. **优先用 `INDEX(data,, col)` 引用列**——当数据结构变化时只需改 data 引用
-4. **能用 SEQUENCE 广播就不用 MAKEARRAY**——更简洁（如乘法表、棋盘格）
-5. **用 `TAKE`/`DROP` 替代复杂的 INDEX 切片**——语义更清晰
-6. **用 `CHOOSECOLS`/`CHOOSEROWS` 选取指定位置**——比 INDEX 多列写法更直观
-7. 先搭建"可读版本"，再考虑压缩为短公式
-8. 对大型数据尽量减少重复计算（缓存到 `LET`）
-9. 为关键 LAMBDA 建立命名函数，形成团队可复用模板
+> PlantUML 源文件见 [`assets/data-pipeline.puml`](assets/data-pipeline.puml)。
+
+Excel 纯公式可以构建完整的 ETL（提取-转换-加载）管道，典型模式如下：
+
+```
+📥 数据输入          🧹 清洗              🔄 转换              📊 聚合              📋 输出
+A2:E200    ──→    FILTER·TRIM     ──→    MAP·BYROW      ──→    UNIQUE·REDUCE  ──→    SORT·HSTACK
+                  IFERROR              LET                    SUMPRODUCT           TAKE
+                  INDEX(,,col)                                MAP+FILTER
+```
+
+**完整示例**（区域销售汇总）：
+
+```excel
+=LET(
+  raw,    A2:E200,                                          -- ① 输入
+  valid,  FILTER(raw, INDEX(raw,,5) > 0),                   -- ② 清洗：去除无效行
+  region, INDEX(valid,, 2),                                 -- ③ 提取字段
+  amount, INDEX(valid,, 5),
+  u,      UNIQUE(region),                                   -- ④ 聚合：按区域分组
+  total,  MAP(u, LAMBDA(r, SUM(FILTER(amount, region=r)))),
+  SORT(HSTACK(u, total), 2, -1)                             -- ⑤ 输出：降序排列
+)
+```
+
+→ [更多流水线示例](formulas/09-advanced-pipelines.md)
 
 ---
 
-## 6. 场景示例集（scenarios/）
+## 💡 最佳实践
 
-以下 20 个场景文件，每个包含 3–5 个从易到难的示例公式及详细说明：
+| # | 建议 | 理由 |
+|:-:|------|------|
+| 1 | **优先用 `LET`** 给中间结果命名 | 降低维护成本，便于调试 |
+| 2 | **优先用 `SEQUENCE` 生成索引** | 替代辅助列和手写常量数组 |
+| 3 | **优先用 `INDEX(data,, col)` 引用列** | 数据结构变化时只需改 data 引用 |
+| 4 | **能用 SEQUENCE 广播就不用 MAKEARRAY** | 更简洁（如乘法表、棋盘格） |
+| 5 | **用 `TAKE`/`DROP` 替代复杂 INDEX 切片** | 语义更清晰 |
+| 6 | **用 `CHOOSECOLS`/`CHOOSEROWS` 选取** | 比 INDEX 多列写法更直观 |
+| 7 | 先搭建"可读版本"，再压缩为短公式 | 团队协作优先可读性 |
+| 8 | 大型数据减少重复计算（缓存到 `LET`） | 避免 O(n²) 性能陷阱 |
+| 9 | 为关键 LAMBDA 建立命名函数 | 形成团队可复用模板 |
+| 10 | 超过 10,000 行时用 `SUMPRODUCT` 替代 `MAP+FILTER` | 性能优化 |
 
-| 编号 | 场景 | 核心函数 |
-|------|------|----------|
-| [01](scenarios/[01]LAMBDA基础.md) | LAMBDA 基础 | LAMBDA、递归 |
-| [02](scenarios/[02]LET局部变量.md) | LET 局部变量 | LET |
-| [03](scenarios/[03]MAP逐元素处理.md) | MAP 逐元素处理 | MAP |
-| [04](scenarios/[04]BYROW按行计算.md) | BYROW 按行计算 | BYROW |
-| [05](scenarios/[05]BYCOL按列计算.md) | BYCOL 按列计算 | BYCOL |
-| [06](scenarios/[06]REDUCE累计折叠.md) | REDUCE 累计折叠 | REDUCE |
-| [07](scenarios/[07]SCAN过程可视化.md) | SCAN 过程可视化 | SCAN |
-| [08](scenarios/[08]MAKEARRAY规则生成.md) | MAKEARRAY 规则生成 | MAKEARRAY |
-| [09](scenarios/[09]VSTACK纵向拼接.md) | VSTACK 纵向拼接 | VSTACK |
-| [10](scenarios/[10]HSTACK横向拼接.md) | HSTACK 横向拼接 | HSTACK |
-| [11](scenarios/[11]FILTER条件筛选.md) | FILTER 条件筛选 | FILTER |
-| [12](scenarios/[12]SORT与SORTBY排序.md) | SORT 与 SORTBY 排序 | SORT、SORTBY |
-| [13](scenarios/[13]UNIQUE去重提取.md) | UNIQUE 去重提取 | UNIQUE |
-| [14](scenarios/[14]XLOOKUP高级查找.md) | XLOOKUP 高级查找 | XLOOKUP |
-| [15](scenarios/[15]综合实战流水线.md) | 综合实战流水线 | 多函数组合 |
-| [16](scenarios/[16]人力资源数据分析.md) | 人力资源数据分析 | UNIQUE + MAP + FILTER + MAKEARRAY |
-| [17](scenarios/[17]财务报表与预算分析.md) | 财务报表与预算分析 | SUMPRODUCT + XLOOKUP + SCAN |
-| [18](scenarios/[18]库存管理与预警.md) | 库存管理与预警 | SCAN + SORTBY + MAKEARRAY + MAP |
-| [19](scenarios/[19]日期时间与排班计划.md) | 日期时间与排班计划 | SEQUENCE + MAKEARRAY + WEEKDAY |
-| [20](scenarios/[20]数据质量与异常检测.md) | 数据质量与异常检测 | BYROW + BYCOL + MAP + PERCENTILE |
+---
+
+## 🔍 如何选择函数
+
+遇到问题时，按以下决策流程选择合适的函数：
+
+```
+需要什么？
+├── 生成数据？
+│   ├── 数字/日期序列 → SEQUENCE
+│   └── 按行列规则生成 → MAKEARRAY（不能用 SEQUENCE 广播时）
+│
+├── 选取数据？
+│   ├── 按行号/列号 → INDEX
+│   ├── 按位置选列/行 → CHOOSECOLS / CHOOSEROWS
+│   └── 截取头尾 → TAKE / DROP
+│
+├── 逐个处理？
+│   ├── 逐元素 → MAP
+│   ├── 按行聚合 → BYROW
+│   └── 按列聚合 → BYCOL
+│
+├── 累计/聚合？
+│   ├── 只要最终结果 → REDUCE
+│   └── 要每步中间值 → SCAN
+│
+├── 筛选/查找？
+│   ├── 条件筛选 → FILTER
+│   ├── 精确/模糊查找 → XLOOKUP
+│   └── 返回位置 → XMATCH
+│
+├── 排序/去重？
+│   ├── 直接排序 → SORT
+│   ├── 外部键排序 → SORTBY
+│   └── 去重 → UNIQUE
+│
+├── 拼接/重塑？
+│   ├── 上下合并 → VSTACK
+│   ├── 左右合并 → HSTACK
+│   ├── 展平 → TOCOL / TOROW
+│   └── 重塑 → WRAPCOLS / WRAPROWS
+│
+└── 文本处理？
+    ├── 拆分 → TEXTSPLIT
+    ├── 合并 → TEXTJOIN
+    └── 截取 → TEXTBEFORE / TEXTAFTER
+```
+
+---
+
+## 📊 PlantUML 图示
+
+本项目在 `assets/` 目录提供 PlantUML 源文件，可在线渲染或本地生成图片：
+
+| 图示 | 文件 | 说明 |
+|------|------|------|
+| 函数分类思维导图 | [`function-taxonomy.puml`](assets/function-taxonomy.puml) | 8 大类函数的分类体系 |
+| 学习路径图 | [`learning-path.puml`](assets/learning-path.puml) | 5 阶段推荐学习路线 |
+| 数据流水线图 | [`data-pipeline.puml`](assets/data-pipeline.puml) | 纯公式 ETL 典型模式 |
+
+**在线渲染**：将 `.puml` 文件内容粘贴到 [PlantUML Online Server](https://www.plantuml.com/plantuml/uml/) 即可预览。
+
+**本地渲染**（需安装 Java + PlantUML）：
+
+```bash
+java -jar plantuml.jar assets/*.puml
+```
 
 ---
 
@@ -333,4 +379,16 @@
 
 本项目采用 [MIT License](LICENSE)。
 
-欢迎持续补充更多基于 **LAMBDA / SEQUENCE / INDEX / REDUCE / SCAN** 的实战示例，把本仓库演进为完整的 Excel 纯公式编程手册！
+---
+
+## 🤝 贡献
+
+欢迎持续补充更多基于 **LAMBDA / SEQUENCE / INDEX / REDUCE / SCAN** 的实战示例！
+
+**贡献建议**：
+- 新增场景文件放入 `scenarios/basic/`（单函数）或 `scenarios/advanced/`（多函数组合）
+- 每个示例文件保持 3–5 个由浅入深的示例
+- 公式中使用 `LET` 命名中间变量，确保可读性
+- 在文件头部标注所需函数和难度等级
+
+把本仓库演进为完整的 **Excel 纯公式编程手册**！
