@@ -302,7 +302,7 @@
 
 ## 6. 场景示例集（scenarios/）
 
-以下 15 个场景文件，每个包含 3–5 个从易到难的示例公式及详细说明：
+以下 20 个场景文件，每个包含 3–5 个从易到难的示例公式及详细说明：
 
 | 编号 | 场景 | 核心函数 |
 |------|------|----------|
@@ -321,6 +321,11 @@
 | [13](scenarios/[13]UNIQUE去重提取.md) | UNIQUE 去重提取 | UNIQUE |
 | [14](scenarios/[14]XLOOKUP高级查找.md) | XLOOKUP 高级查找 | XLOOKUP |
 | [15](scenarios/[15]综合实战流水线.md) | 综合实战流水线 | 多函数组合 |
+| [16](scenarios/[16]人力资源数据分析.md) | 人力资源数据分析 | UNIQUE + MAP + FILTER + MAKEARRAY |
+| [17](scenarios/[17]财务报表与预算分析.md) | 财务报表与预算分析 | SUMPRODUCT + XLOOKUP + SCAN |
+| [18](scenarios/[18]库存管理与预警.md) | 库存管理与预警 | SCAN + SORTBY + MAKEARRAY + MAP |
+| [19](scenarios/[19]日期时间与排班计划.md) | 日期时间与排班计划 | SEQUENCE + MAKEARRAY + WEEKDAY |
+| [20](scenarios/[20]数据质量与异常检测.md) | 数据质量与异常检测 | BYROW + BYCOL + MAP + PERCENTILE |
 
 ---
 
